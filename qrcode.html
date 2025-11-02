@@ -5,65 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>🎟️ Solstitium Check-in QR</title>
 
-  <!-- 🔹 META PREVIEW PER WHATSAPP -->
+  <!-- ✅ Open Graph per WhatsApp / Telegram -->
   <meta property="og:title" content="🎟️ Solstitium Check-in QR" />
   <meta property="og:description" content="Mostra questo QR all’ingresso per completare il tuo check-in Solstitium." />
-  <meta property="og:image" content="" id="ogImage">
+  <meta property="og:image" id="ogImage" content="" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="" id="ogUrl">
+  <meta property="og:url" id="ogUrl" content="" />
   <meta name="theme-color" content="#d4af37">
 
-  <!-- 🔹 STILE DARK LUXURY -->
   <style>
-    * { box-sizing: border-box; }
     body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background: radial-gradient(circle at center, #111 0%, #000 100%);
-      font-family: 'Poppins', sans-serif;
-      color: #d4af37;
-      text-align: center;
+      margin:0; padding:0; height:100vh;
+      display:flex; flex-direction:column; justify-content:center; align-items:center;
+      background:#000; color:#d4af37; font-family:'Poppins',sans-serif; text-align:center;
     }
     img {
-      width: 240px;
-      height: 240px;
-      border-radius: 16px;
-      box-shadow: 0 0 25px rgba(212,175,55,0.45);
-      margin-bottom: 20px;
+      width:240px; height:240px; border-radius:18px;
+      box-shadow:0 0 40px rgba(212,175,55,0.4);
+      margin-bottom:20px;
     }
-    h1 {
-      font-size: 1.3rem;
-      font-weight: 600;
-      letter-spacing: 0.4px;
-    }
-    p {
-      color: #f5f5f5;
-      font-size: 0.9rem;
-      opacity: 0.8;
-    }
-    footer {
-      position: absolute;
-      bottom: 14px;
-      color: #777;
-      font-size: 0.75rem;
-    }
+    h1 { font-size:1.2rem; margin-bottom:6px; }
+    p { color:#ccc; font-size:0.9rem; max-width:90%; }
   </style>
 </head>
 <body>
   <img id="qr" alt="Solstitium QR Code" src="">
   <h1>Mostra questo QR all’ingresso</h1>
   <p>Questo codice serve per il check-in Solstitium.</p>
-  <footer>© Solstitium 2025</footer>
 
   <script>
-    // 🔸 Estrai nome file dal parametro ?file=
-    const params = new URLSearchParams(location.search);
+    const params = new URLSearchParams(window.location.search);
     const file = params.get("file");
-
     if (file) {
       const qrUrl = `https://srnlpifcanveusghgqaa.supabase.co/storage/v1/object/public/qrcodes/${file}`;
       document.getElementById("qr").src = qrUrl;
@@ -71,10 +43,10 @@
       document.getElementById("ogUrl").setAttribute("content", location.href);
     } else {
       document.body.innerHTML = `
-        <h1>⚠️ QR non trovato</h1>
-        <p>Il link fornito non contiene un codice valido.</p>
-      `;
+        <h2>⚠️ QR non trovato</h2>
+        <p>Il link fornito non contiene un codice valido.</p>`;
     }
   </script>
 </body>
 </html>
+
