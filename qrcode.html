@@ -76,7 +76,21 @@
         </div>`;
       console.warn("❌ Nessun parametro ?file trovato nella URL");
     }
-  </script>
+  <script>
+  const params = new URLSearchParams(location.search);
+  const file = params.get("file");
+  if (file) {
+    const qrUrl = `https://srnlpifcanveusghgqaa.supabase.co/storage/v1/object/public/qrcodes/${file}`;
+    document.getElementById("qr").src = qrUrl;
+    document.getElementById("ogImage").setAttribute("content", qrUrl);
+    document.getElementById("ogUrl").setAttribute("content", location.href);
+  } else {
+    document.body.innerHTML = `
+      <h1>⚠️ QR non trovato</h1>
+      <p>Il link fornito non contiene un codice valido.</p>`;
+  }
+</script>
 </body>
 </html>
+
 
