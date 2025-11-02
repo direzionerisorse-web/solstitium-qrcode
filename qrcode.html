@@ -3,84 +3,77 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Solstitium Check-in QR</title>
+  <title>🎟️ Solstitium Check-in QR</title>
 
-  <!-- ✅ META PREVIEW STATICA per WhatsApp -->
+  <!-- 🔹 META PREVIEW PER WHATSAPP -->
   <meta property="og:title" content="🎟️ Solstitium Check-in QR" />
   <meta property="og:description" content="Mostra questo QR all’ingresso per completare il tuo check-in Solstitium." />
-  <meta property="og:image" content="https://srnlpifcanveusghgqaa.supabase.co/storage/v1/object/public/public_site/solstitium_preview_qr.png" />
+  <meta property="og:image" content="" id="ogImage">
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://srnlpifcanveusghgqaa.supabase.co/storage/v1/object/public/public_site/qrcode.html" />
+  <meta property="og:url" content="" id="ogUrl">
   <meta name="theme-color" content="#d4af37">
 
+  <!-- 🔹 STILE DARK LUXURY -->
   <style>
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
+    * { box-sizing: border-box; }
     body {
-      margin: 0; padding: 0;
-      display: flex; flex-direction: column;
-      justify-content: center; align-items: center;
-      background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
-      color: #d4af37;
-      font-family: "Poppins", sans-serif;
+      margin: 0;
       height: 100vh;
-      text-align: center;
-      overflow: hidden;
-    }
-
-    img#qr {
-      width: 240px; height: 240px;
-      border-radius: 16px;
-      box-shadow: 0 0 25px rgba(212,175,55,0.4);
-      opacity: 0;
-      animation: fadeIn 1s ease-out forwards;
-    }
-
-    h1 {
-      font-size: 1.1rem;
-      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle at center, #111 0%, #000 100%);
+      font-family: 'Poppins', sans-serif;
       color: #d4af37;
-      opacity: 0;
-      animation: fadeIn 1.5s ease-out 0.3s forwards;
+      text-align: center;
     }
-
+    img {
+      width: 240px;
+      height: 240px;
+      border-radius: 16px;
+      box-shadow: 0 0 25px rgba(212,175,55,0.45);
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+    }
+    p {
+      color: #f5f5f5;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
     footer {
       position: absolute;
-      bottom: 40px;
-      text-align: center;
-      color: #ccc;
-      font-size: 0.9rem;
-      opacity: 0;
-      animation: fadeIn 2s ease-out 0.6s forwards;
-    }
-
-    footer img {
-      width: 60px;
-      opacity: 0.85;
-      margin-bottom: 6px;
+      bottom: 14px;
+      color: #777;
+      font-size: 0.75rem;
     }
   </style>
 </head>
 <body>
   <img id="qr" alt="Solstitium QR Code" src="">
   <h1>Mostra questo QR all’ingresso</h1>
-
-  <footer>
-    <img src="https://srnlpifcanveusghgqaa.supabase.co/storage/v1/object/public/public_site/logo_solstitium_gold.png" alt="Logo Solstitium">
-    <div>Solstitium • Restaurant & Lounge</div>
-  </footer>
+  <p>Questo codice serve per il check-in Solstitium.</p>
+  <footer>© Solstitium 2025</footer>
 
   <script>
+    // 🔸 Estrai nome file dal parametro ?file=
     const params = new URLSearchParams(location.search);
     const file = params.get("file");
+
     if (file) {
       const qrUrl = `https://srnlpifcanveusghgqaa.supabase.co/storage/v1/object/public/qrcodes/${file}`;
       document.getElementById("qr").src = qrUrl;
+      document.getElementById("ogImage").setAttribute("content", qrUrl);
+      document.getElementById("ogUrl").setAttribute("content", location.href);
     } else {
-      document.body.innerHTML = "<h1>QR non trovato</h1>";
+      document.body.innerHTML = `
+        <h1>⚠️ QR non trovato</h1>
+        <p>Il link fornito non contiene un codice valido.</p>
+      `;
     }
   </script>
 </body>
