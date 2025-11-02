@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
@@ -6,91 +7,90 @@
   <title>Solstitium Check-in QR</title>
 
   <!-- 👁️‍🗨️ Meta preview per WhatsApp / Telegram -->
+
   <meta property="og:title" content="🎟️ Solstitium Check-in QR" />
   <meta property="og:description" content="Mostra questo QR all’ingresso per completare il tuo check-in Solstitium." />
-  <meta property="og:image" content="" id="ogImage">
+  <meta property="og:image" content="" id="ogImage" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="" id="ogUrl">
-  <meta name="theme-color" content="#d4af37">
+  <meta property="og:url" content="" id="ogUrl" />
+  <meta name="theme-color" content="#d4af37" />
 
   <style>
     body {
-      margin: 0; padding: 0;
-      display: flex; justify-content: center; align-items: center;
-      background: #000; height: 100vh;
-      flex-direction: column; color: #d4af37; font-family: Poppins, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: #000;
+      font-family: "Poppins", sans-serif;
+      color: #d4af37;
       text-align: center;
     }
     img {
-      width: 260px; height: 260px; border-radius: 16px;
+      width: 260px;
+      height: 260px;
+      border-radius: 16px;
       box-shadow: 0 0 25px rgba(212,175,55,0.5);
     }
-    h1 { font-size: 1.2rem; margin-top: 20px; }
-    p { font-size: 0.9rem; color: #ccc; }
+    h1 {
+      font-size: 1.2rem;
+      margin-top: 20px;
+    }
+    p {
+      font-size: 0.9rem;
+      color: #ccc;
+      margin-top: 8px;
+    }
+    .error {
+      color: #d4af37;
+      padding: 40px;
+    }
   </style>
+
 </head>
-  
+
 <body>
   <div id="qr-container">
-    <img id="qr" alt="Solstitium QR Code" src="">
+    <img id="qr" alt="Solstitium QR Code" src="" />
     <h1>Mostra questo QR all’ingresso</h1>
     <p>Questo codice serve per il check-in Solstitium.</p>
   </div>
 
   <script>
     // =========================================================
-    // 🧩 QR Loader - versione 2025 LUXURY FINAL
+    // 🧩 Solstitium QR Loader — versione 2025 FINAL
     // =========================================================
-
     const params = new URLSearchParams(window.location.search);
     const file = params.get("file");
-
     const imgEl = document.getElementById("qr");
-    const titleEl = document.querySelector("title");
 
     if (file) {
       const qrUrl = `https://srnlpifcanveusghgqaa.supabase.co/storage/v1/object/public/qrcodes/${file}`;
       imgEl.src = qrUrl;
-      titleEl.textContent = `🎟️ Solstitium Check-in — ${file.split("_")[0]}`;
+      document.title = `🎟️ Solstitium Check-in — ${file.split("_")[0]}`;
 
-      // Aggiorna i meta tag dinamici
-      const updateMeta = (property, content) => {
-        let tag = document.querySelector(`meta[property='${property}']`);
-        if (!tag) {
-          tag = document.createElement("meta");
-          tag.setAttribute("property", property);
-          document.head.appendChild(tag);
-        }
-        tag.setAttribute("content", content);
+      // Aggiorna meta dinamici
+      const setMeta = (id, content) => {
+        const el = document.getElementById(id);
+        if (el) el.setAttribute("content", content);
       };
-
-      updateMeta("og:image", qrUrl);
-      updateMeta("og:url", window.location.href);
+      setMeta("ogImage", qrUrl);
+      setMeta("ogUrl", window.location.href);
 
       console.log("✅ QR caricato:", qrUrl);
     } else {
       document.body.innerHTML = `
-        <div style="text-align:center;color:#d4af37;padding:40px;">
+        <div class="error">
           <h1>⚠️ QR non trovato</h1>
           <p>Il link fornito non contiene un codice valido.</p>
         </div>`;
       console.warn("❌ Nessun parametro ?file trovato nella URL");
     }
-  <script>
-  const params = new URLSearchParams(location.search);
-  const file = params.get("file");
-  if (file) {
-    const qrUrl = `https://srnlpifcanveusghgqaa.supabase.co/storage/v1/object/public/qrcodes/${file}`;
-    document.getElementById("qr").src = qrUrl;
-    document.getElementById("ogImage").setAttribute("content", qrUrl);
-    document.getElementById("ogUrl").setAttribute("content", location.href);
-  } else {
-    document.body.innerHTML = `
-      <h1>⚠️ QR non trovato</h1>
-      <p>Il link fornito non contiene un codice valido.</p>`;
-  }
-</script>
+  </script>
+
 </body>
 </html>
-
 
