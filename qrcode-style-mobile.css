@@ -1,0 +1,93 @@
+/* =========================================================
+💎 Solstitium Check-in — Mobile Style (2025)
+• Layout ottimizzato per smartphone e tablet
+• ✔️ grande con glow
+• Font dorati leggibili in ogni condizione
+========================================================= */
+
+body {
+  margin: 0;
+  font-family: Poppins, system-ui, sans-serif;
+  background: #000;
+  color: #d4af37;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  text-align: center;
+  padding: 20px;
+}
+
+h1 {
+  margin: 10px 0;
+  font-size: 1.8rem;
+  color: #ffd766;
+}
+
+p {
+  margin: 6px 0;
+  color: #ccc;
+  font-size: 1.1rem;
+}
+
+.locked,
+.already,
+.success {
+  background: #0b0b0b;
+  border-radius: 28px;
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+  padding: 36px 28px;
+  max-width: 420px;
+  width: 90%;
+  transition: all 0.4s ease;
+}
+
+.checkmark {
+  font-size: 100px;
+  color: #00e676;
+  margin-bottom: 16px;
+  text-shadow: 0 0 25px #00e676;
+  animation: pulse 1.5s ease infinite;
+}
+
+.warn {
+  color: #ff5252;
+  font-size: 1.2rem;
+}
+
+.loading {
+  color: #ffd766;
+  font-size: 1.1rem;
+}
+
+button.close-btn {
+  margin-top: 25px;
+  background: #d4af37;
+  color: #000;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 12px 28px;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+button.close-btn:hover {
+  transform: scale(1.04);
+  background: #ffde78;
+}
+
+@keyframes pulse {
+  0% { text-shadow: 0 0 10px #00e676; }
+  50% { text-shadow: 0 0 25px #00e676; }
+  100% { text-shadow: 0 0 10px #00e676; }
+}
+
+/* Layout responsive */
+@media (max-width: 480px) {
+  h1 { font-size: 1.6rem; }
+  p { font-size: 1rem; }
+  .checkmark { font-size: 90px; }
+}
