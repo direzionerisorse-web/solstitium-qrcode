@@ -1,0 +1,42 @@
+body {
+  margin: 0;
+  font-family: Poppins, system-ui, sans-serif;
+  background: #000;
+  color: #d4af37;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+}
+h1 {
+  margin: 8px 0;
+  font-size: 1.6rem;
+}
+p {
+  margin: 4px 0;
+  color: #ccc;
+  font-size: 0.9rem;
+}
+.locked,
+.already,
+.success {
+  background: #0b0b0b;
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.3);
+  padding: 30px 25px;
+  max-width: 360px;
+}
+.checkmark {
+  font-size: 70px;
+  color: #00e676;
+  margin-bottom: 8px;
+  text-shadow: 0 0 12px #00e676;
+}
+.warn {
+  color: #ff5252;
+}
+.loading {
+  color: #ffd766;
+}
