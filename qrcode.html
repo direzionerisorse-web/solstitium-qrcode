@@ -6,7 +6,19 @@
   <title>Solstitium Check-in</title>
   <link rel="stylesheet" href="qrcode-style.css" />
   <meta name="theme-color" content="#d4af37" />
+
+  <script>
+    // 📱 Carica automaticamente lo stile mobile se schermo < 768px
+    if (window.innerWidth < 768) {
+      const mobileCSS = document.createElement("link");
+      mobileCSS.rel = "stylesheet";
+      mobileCSS.href = "qrcode-style-mobile.css";
+      document.head.appendChild(mobileCSS);
+      console.log("📱 Stile mobile attivato");
+    }
+  </script>
 </head>
+
 <body>
   <div id="wrapper">
     <div id="message"></div>
@@ -19,7 +31,7 @@
   <!-- Handler Telegram -->
   <script src="telegram-handler.js"></script>
 
-  <!-- Script principale -->
+  <!-- Script principale Check-in Manager -->
   <script src="qrcode-manager.js"></script>
 </body>
 </html>
