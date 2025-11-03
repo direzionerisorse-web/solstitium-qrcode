@@ -3,101 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Solstitium Check-in QR</title>
-
-  <!-- 👁️‍🗨️ Meta preview per WhatsApp / Telegram -->
-
-  <meta property="og:title" content="🎟️ Solstitium Check-in QR" />
-  <meta property="og:description" content="Mostra questo QR all’ingresso per completare il tuo check-in Solstitium." />
-  <meta property="og:image" content="" id="ogImage" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="" id="ogUrl" />
+  <title>Solstitium Check-in</title>
+  <link rel="stylesheet" href="qrcode-style.css" />
   <meta name="theme-color" content="#d4af37" />
-
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      background: #000;
-      font-family: "Poppins", sans-serif;
-      color: #d4af37;
-      text-align: center;
-    }
-    img {
-      width: 260px;
-      height: 260px;
-      border-radius: 16px;
-      box-shadow: 0 0 25px rgba(212,175,55,0.5);
-    }
-    h1 {
-      font-size: 1.2rem;
-      margin-top: 20px;
-      color: #d4af37;
-      text-shadow: 0 0 6px rgba(212,175,55,0.4);
-    }
-    p {
-      font-size: 0.9rem;
-      color: #ccc;
-      margin-top: 8px;
-    }
-    .error {
-      color: #d4af37;
-      padding: 40px;
-    }
-  </style>
-
 </head>
-
 <body>
-  <div id="qr-container">
-    <img id="qr" alt="Solstitium QR Code" src="">
-    <h1>Mostra questo QR all’ingresso</h1>
-    <p>Questo codice serve per il check-in Solstitium.</p>
+  <div id="wrapper">
+    <div id="message"></div>
+    <div id="checkin"></div>
   </div>
 
-  <script>
-    // =========================================================
-    // 🧩 Solstitium QR Loader — versione 2025 FIXED FINAL
-    // =========================================================
-    const params = new URLSearchParams(window.location.search);
-    const file = params.get("file");
-    const qrImg = document.getElementById("qr");
+  <!-- Libreria Supabase -->
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 
-    if (file) {
-      // Costruisci il link dell'immagine
-      const qrUrl = `https://srnlpifcanveusghgqaa.supabase.co/storage/v1/object/public/qrcodes/${encodeURIComponent(file)}`;
+  <!-- Handler Telegram -->
+  <script src="telegram-handler.js"></script>
 
-      // Carica l'immagine e aggiorna titolo + meta
-      qrImg.src = qrUrl;
-      qrImg.onload = () => console.log("✅ QR visualizzato correttamente:", qrUrl);
-      qrImg.onerror = () => console.warn("❌ Impossibile caricare il QR:", qrUrl);
-
-      document.title = `🎟️ Solstitium Check-in — ${file.split("_")[0]}`;
-
-      // Aggiorna i meta dinamici per preview
-      const setMeta = (id, content) => {
-        const el = document.getElementById(id);
-        if (el) el.setAttribute("content", content);
-      };
-      setMeta("ogImage", qrUrl);
-      setMeta("ogUrl", window.location.href);
-
-      console.log("✅ QR caricato da Supabase:", qrUrl);
-    } else {
-      // Nessun parametro trovato
-      document.body.innerHTML = `
-        <div class="error">
-          <h1>⚠️ QR non trovato</h1>
-          <p>Il link fornito non contiene un codice valido.</p>
-        </div>`;
-      console.warn("❌ Nessun parametro ?file trovato nella URL");
-    }
-  </script>
-
+  <!-- Script principale -->
+  <script src="qrcode-manager.js"></script>
 </body>
 </html>
