@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
@@ -38,6 +37,8 @@
     h1 {
       font-size: 1.2rem;
       margin-top: 20px;
+      color: #d4af37;
+      text-shadow: 0 0 6px rgba(212,175,55,0.4);
     }
     p {
       font-size: 0.9rem;
@@ -54,25 +55,31 @@
 
 <body>
   <div id="qr-container">
-    <img id="qr" alt="Solstitium QR Code" src="" />
+    <img id="qr" alt="Solstitium QR Code" src="">
     <h1>Mostra questo QR all’ingresso</h1>
     <p>Questo codice serve per il check-in Solstitium.</p>
   </div>
 
   <script>
     // =========================================================
-    // 🧩 Solstitium QR Loader — versione 2025 FINAL
+    // 🧩 Solstitium QR Loader — versione 2025 FIXED FINAL
     // =========================================================
     const params = new URLSearchParams(window.location.search);
     const file = params.get("file");
-    const imgEl = document.getElementById("qr");
+    const qrImg = document.getElementById("qr");
 
     if (file) {
-      const qrUrl = `https://srnlpifcanveusghgqaa.supabase.co/storage/v1/object/public/qrcodes/${file}`;
-      imgEl.src = qrUrl;
+      // Costruisci il link dell'immagine
+      const qrUrl = `https://srnlpifcanveusghgqaa.supabase.co/storage/v1/object/public/qrcodes/${encodeURIComponent(file)}`;
+
+      // Carica l'immagine e aggiorna titolo + meta
+      qrImg.src = qrUrl;
+      qrImg.onload = () => console.log("✅ QR visualizzato correttamente:", qrUrl);
+      qrImg.onerror = () => console.warn("❌ Impossibile caricare il QR:", qrUrl);
+
       document.title = `🎟️ Solstitium Check-in — ${file.split("_")[0]}`;
 
-      // Aggiorna meta dinamici
+      // Aggiorna i meta dinamici per preview
       const setMeta = (id, content) => {
         const el = document.getElementById(id);
         if (el) el.setAttribute("content", content);
@@ -80,8 +87,9 @@
       setMeta("ogImage", qrUrl);
       setMeta("ogUrl", window.location.href);
 
-      console.log("✅ QR caricato:", qrUrl);
+      console.log("✅ QR caricato da Supabase:", qrUrl);
     } else {
+      // Nessun parametro trovato
       document.body.innerHTML = `
         <div class="error">
           <h1>⚠️ QR non trovato</h1>
@@ -93,4 +101,3 @@
 
 </body>
 </html>
-
